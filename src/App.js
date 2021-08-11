@@ -4,6 +4,12 @@ import GoogleLogin from 'react-google-login'
 import Messages from './components/messages'
 import './App.css';
 
+// ! extract to auth file 
+const SCOPES = [
+  'https://mail.google.com/',
+  'https://www.googleapis.com/auth/gmail.modify'
+]
+
 function App() {
   const [isLoggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
@@ -19,6 +25,7 @@ function App() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        'X-Requested-With': 'XMLHttpRequest',
         "Authorization": JSON.stringify({ code })
       }
     })
@@ -60,7 +67,7 @@ function App() {
               accessType='offline'
               responseType='code'
               prompt='consent'
-              scope={'https://www.googleapis.com/auth/gmail.modify'}
+              scope={SCOPES[0]}
             />
         }
       </div>
