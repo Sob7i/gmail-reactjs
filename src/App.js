@@ -21,7 +21,7 @@ function App() {
 
     const { code } = googleData
 
-    const res = await fetch("http://localhost:5000/signin", {
+    const res = await fetch("http://localhost:5000/login", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -32,8 +32,11 @@ function App() {
 
     const data = await res.json()
     setUser(data)
+
+    // TODO check if name is truthy
     localStorage.setItem('given_name', data.given_name)
 
+    // TODO check if token is truthy
     const { access_token } = data
     localStorage.setItem('access_token', access_token)
 
